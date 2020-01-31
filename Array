@@ -1,0 +1,290 @@
+import java.util.Scanner;
+
+/** 
+ * Array lab
+ * TODO: Run all print statements from the main function
+ * @author Bridget Naylor
+ */
+public class Arrays {
+	
+	public static void main( String[] args ) {
+		
+		int[] array = new int[ 10 ];
+		
+		boolean quit = false;
+		
+		populateArray( array );
+		
+		while (quit != true ) {
+			displayMenu(quit, array);
+		}
+	}	
+	
+	/** 
+	 * Populate array method
+	 * @param array the empty array of size 10
+	 * @return the full array
+	 */
+	public static int[] populateArray( int[] array ){
+		int numInputs = 0;
+		System.out.println( "Enter 10 numbers: " );
+
+		while ( numInputs < 10 ){
+			
+			int enteredInt = CheckInput.getInt();
+			
+			array[ numInputs ] = enteredInt;
+			
+			numInputs += 1;
+			
+			if ( numInputs == 10 ) {
+				
+				break;
+				
+			}
+			
+			System.out.println( "Enter " + ( 10 - numInputs ) + " more numbers" );
+
+		}
+		
+		return array;
+	 }
+	
+	/** 
+	 * Prints the array values
+	 * @param array the filled array
+	 * @return nothing
+	 */
+	public static void displayValues( int[] array ){
+		
+		for (int i = 0; i < array.length; i++ ) {
+			
+			if ( i != 9 ) {
+				
+				System.out.print( array[i] + ", " );
+				
+			} else { 
+				
+				System.out.print( array[i] );
+				
+				System.out.println( "" );
+				
+			}	
+		}
+	}
+	
+	/** 
+	 * Prints the array contents reversed
+	 * @param array the filled array
+	 * @return nothing
+	 */
+	public static void displayReversedValues( int[] array ){
+		
+		for (int i = array.length - 1; i > -1; i-- ) {
+			
+			if ( i != 0 ) {
+				
+				System.out.print( array[i] + ", " );
+				
+			} else { 
+				
+				System.out.print( array[i] );
+				
+				System.out.println( "" );
+				
+			}	
+		}
+	}
+	
+	/** 
+	 * Prints the sum of all the contents of the array
+	 * @param array the filled array
+	 * @return nothing
+	 */
+	public static int displaySum( int[] array ){
+		
+		int sum = 0;
+		
+		for (int i = 0; i < array.length; i++ ) {
+			
+			sum += array[ i ];
+			
+		}
+		
+		System.out.println( "Sum = " + sum);
+		return sum;
+		
+	}
+	
+	/** 
+	 * Prints the biggest number of all the contents of the array
+	 * @param array the filled array
+	 * @return nothing
+	 */
+	public static int displayMax( int[] array ){
+		
+		int max = 0;
+		
+		for (int i = 0; i < array.length; i++ ) {
+			
+			if ( max < array[ i ] ) {
+				
+				max = array[ i ];
+				
+			}
+			
+		}
+		
+		System.out.println( "Max = " + max);
+		return max;
+	}
+	
+	/** 
+	 * Prints the index in 1 base of the value requested
+	 * Assumes that there is only one value in the array or returns last occurrence of value
+	 * @param array the filled array
+	 * @param valueDesired the value to get the index of 
+	 * @return real index of object + 1 to make it base 1 for the user
+	 */
+	public static int searchForValue( int[] array, int valueDesired ){
+		
+		boolean foundValue = false;
+		
+		//real index value plus 1
+		int indexValue = 1;
+		
+		for (int i = 0; i < array.length; i++ ) {
+			
+			if ( array[ i ] ==  valueDesired) {
+				
+				indexValue = indexValue + i;
+				
+				foundValue = true;
+				
+			}
+			
+		}
+		
+		System.out.println( "Value Index = " + indexValue);
+		if ( foundValue == true ) {
+			
+			return indexValue;
+			
+		} else {
+			
+			return -1;
+			
+		}
+		
+		
+	}
+	
+	/** 
+	 * inserts given value into given location of the given array
+	 * overwrites the old value in the array
+	 * @param array the filled array
+	 * @param index the index to insert the value into - 1 to get real index to insert
+	 * @param value the value to insert into the given index
+	 * @return nothing
+	 */
+	public static void insertValue( int[] array, int index, int value ){
+
+		//real index value plus 1
+		int indexValue = index - 1;
+		
+		for (int i = 0; i < array.length; i++ ) {
+			
+			if ( i ==  indexValue) {
+				
+				array[ i ] = value;
+				
+			}
+		}
+		
+		System.out.println( "Value inserted = " + value + " at index " + index);
+		
+	}
+	
+	/** 
+	 * Populate array method
+	 * @param boolean quit to know when to stop the program
+	 * @param int[] current values of the array
+	 * @return the full array
+	 */
+	public static void displayMenu( boolean quit, int[] array ){
+		
+		System.out.println( "1. Display Values" );
+		
+		System.out.println( "2. Display Reversed" );
+		
+		System.out.println( "3. Display Sum" );
+		
+		System.out.println( "4. Display Maximum" );
+		
+		System.out.println( "5. Search for a Value" );
+		
+		System.out.println( "6. Insert new Value" );
+		
+		System.out.println( "7. Reset Values" );
+		
+		System.out.println( "8. Quit" );
+		
+		int enteredInt = CheckInput.getInt();
+		
+		if ( enteredInt == 1 ) {
+			
+			//Display Values
+			displayValues( array );
+			
+		} else if ( enteredInt == 2 ) {
+			
+			//Display Reversed
+			displayReversedValues( array );
+			
+		} else if ( enteredInt == 3 ) {
+			
+			//Display Sum
+			displaySum( array );
+			
+		} else if ( enteredInt == 4 ) {
+			
+			//Display Max
+			displayMax( array );
+			
+		} else if ( enteredInt == 5 ) {
+			
+			//Search for value
+			System.out.println("Enter a value to search for: ");
+			
+			int valueDesired = CheckInput.getInt();
+			
+			searchForValue( array, valueDesired );
+			
+		} else if ( enteredInt == 6 ) {
+			
+			//Insert new value
+			
+			System.out.println("Enter an index between 1-10: ");
+			
+			int indexToInsertIn = CheckInput.getIntRange( 1, 10 );
+			
+			System.out.println("Enter a value to insert: ");
+			
+			int valueToInsert = CheckInput.getInt();
+			
+			insertValue( array, indexToInsertIn, valueToInsert );
+			
+		} else if ( enteredInt == 7 ) {
+			
+			populateArray( array );
+			
+		} else if ( enteredInt == 8 ) {
+			
+			quit = true;
+			
+		}
+		
+	}
+	
+	
+}
